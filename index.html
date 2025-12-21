@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yogalakshmi - Portfolio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --activeColor: #6d7008;
+    }
+
+    * {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+    }
+
+    .section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      scroll-margin-top: 6vh;
+      padding: 40px 20px;
+      min-height: 50vh;
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 30px 15px;
+        min-height: 40vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section {
+        padding: 20px 10px;
+        min-height: 35vh;
+      }
+    }
+
+    .color-picker {
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 768px) {
+      .color-picker {
+        width: 35px;
+        height: 35px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .color-picker {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .overlay-blocker {
+      pointer-events: none;
+    }
+
+    .overlay-blocker * {
+      pointer-events: auto;
+    }
+
+    .profile-image {
+      width: 17vh;
+      height: 17vh;
+    }
+
+    @media (max-width: 768px) {
+      .profile-image {
+        width: 14vh;
+        height: 14vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile-image {
+        width: 12vh;
+        height: 12vh;
+      }
+    }
+
+    .profile-name {
+      font-size: 33px;
+    }
+
+    .profile-title {
+      font-size: 25px;
+    }
+
+    @media (max-width: 768px) {
+      .profile-name {
+        font-size: 28px;
+      }
+      
+      .profile-title {
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile-name {
+        font-size: 22px;
+      }
+      
+      .profile-title {
+        font-size: 16px;
+      }
+    }
+
+    #buttomBar {
+      font-size: 16px;
+    }
+
+    @media (max-width: 768px) {
+      #buttomBar {
+        font-size: 14px;
+        height: 5vh;
+      }
+      
+      #buttomBar p {
+        padding: 0 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #buttomBar {
+        font-size: 12px;
+        height: 4.5vh;
+        gap: 5px;
+      }
+      
+      #buttomBar p {
+        padding: 0 5px;
+      }
+    }
+
+    #resumeButton {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+
+    @media (max-width: 768px) {
+      #resumeButton {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #resumeButton {
+        font-size: 11px;
+        padding: 5px 10px;
+        top: 10px;
+        right: 10px;
+      }
+    }
+
+    .color-picker-container {
+      right: 0;
+      z-index: 50;
+    }
+
+    #color {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      opacity: 0;
+    }
+
+    #color.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    #scrollToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: #6d7008;
+      border-radius: 50%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      z-index: 40;
+    }
+
+    #scrollToTop:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    #scrollToTop svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    @media (max-width: 768px) {
+      #scrollToTop {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+      }
+
+      #scrollToTop svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #scrollToTop {
+        width: 40px;
+        height: 40px;
+        bottom: 15px;
+        right: 15px;
+      }
+
+      #scrollToTop svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding-left: 50px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      width: 3px;
+      background: var(--activeColor);
+      top: 0;
+      bottom: 0;
+      left: 20px;
+    }
+
+    .timeline-item {
+      padding: 15px 0 40px 70px;
+      position: relative;
+      margin-left: -50px;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: var(--activeColor);
+      border: 3px solid white;
+      border-radius: 50%;
+      top: 20px;
+      left: 12px;
+      z-index: 1;
+      box-shadow: 0 0 0 3px var(--activeColor);
+    }
+
+    .timeline-content {
+      position: relative;
+    }
+
+    @media screen and (max-width: 768px) {
+      .timeline {
+        padding-left: 30px;
+      }
+
+      .timeline::before {
+        left: 15px;
+      }
+
+      .timeline-item {
+        padding: 10px 0 30px 30px;
+        margin-left: -30px;
+      }
+
+      .timeline-item::after {
+        left: 7px;
+        width: 14px;
+        height: 14px;
+      }
+      
+      .timeline-content .flex {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .timeline-content .flex .text-right {
+        text-align: left;
+        margin-top: 10px;
+      }
+      
+      .timeline-content .flex .pr-16,
+      .timeline-content .flex .pr-20 {
+        padding-right: 0;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .timeline {
+        padding-left: 20px;
+      }
+
+      .timeline-item {
+        padding: 8px 0 25px 25px;
+        margin-left: -20px;
+      }
+
+      .timeline-item::after {
+        left: 6px;
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    /* Project Cards */
+    .project-card {
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .filter-btn {
+      position: relative;
+      border: 2px solid var(--activeColor);
+      color: var(--activeColor);
+      background: white;
+    }
+
+    .filter-btn.active {
+      background-color: var(--activeColor);
+      color: white;
+    }
+
+    .filter-btn:hover {
+      background-color: var(--activeColor);
+      color: white;
+    }
+
+    /* Social Media Icons */
+    .social-icon {
+      fill: var(--activeColor);
+    }
+
+    /* Checkmark Icons */
+    .checkmark-icon {
+      fill: var(--activeColor);
+    }
+
+    /* Responsive grid adjustments */
+    @media (max-width: 1024px) {
+      #projectsGrid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      #projectsGrid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Contact section responsive */
+    @media (max-width: 768px) {
+      #contact .flex-col {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      #contact .flex-col .flex-shrink-0 {
+        margin: 0 auto 30px auto;
+      }
+      
+      #contact .w-48.h-48 {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #contact .w-48.h-48 {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    /* About section responsive */
+    @media (max-width: 768px) {
+      #about .flex.gap-5 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+      }
+      
+      #about .flex.gap-5 .flex-shrink-0 {
+        margin-bottom: 5px;
+      }
+    }
+
+    /* Skills section responsive */
+    @media (max-width: 768px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      
+      .relative.w-32.h-32 {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    /* Color picker responsive */
+    @media (max-width: 768px) {
+      .color-picker-container {
+        top: 60%;
+      }
+      
+      .color-picker-container .w-10.h-10 {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .color-picker-container {
+        top: 70%;
+      }
+      
+      .color-picker-container .w-10.h-10 {
+        width: 32px;
+        height: 32px;
+      }
+      
+      #color {
+        padding: 8px;
+      }
+      
+      .grid.grid-cols-3.gap-2 {
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100">
+
+<div class="relative">
+  <div>
+        <div id="topBar" class="h-[7vh] bg-[#6d7008] w-full" style="opacity: 0.7;"></div>
+
+        <div id="colorSection"
+          class="text-center bg-[#6d7008] relative z-20"
+          style="padding: 12vh 0; transition: all 0.3s; height: 40vh;">
+          
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.1) 100%); pointer-events: none;"></div>
+      
+          <div class="overlay-blocker absolute flex justify-center items-center w-full z-10"
+            style="top: -45px; height: 30vh;">
+            <div>
+              <div class="border-2 border-white p-1 rounded-[20px]">
+                <img class="profile-image object-contain" src="/protfolio/image/yoga_1.png" alt="Profile">
+              </div>
+            </div>
+          </div>
+      
+          <div class="overlay-blocker absolute flex justify-center items-center w-full z-10"
+            style="top: 0; height: 55vh;">
+            <div class="px-4">
+              <p class="text-white profile-name font-semibold p-1 m-0">Yogalakshmi</p>
+              <p class="text-white profile-title p-1 m-0">Software Developer</p>
+            </div>
+          </div>
+        </div>
+      
+        <div id="buttom1Bar" class="w-full h-[4vh] bg-[#6d7008]" style="opacity: 0.85;"></div>
+        <div id="buttomBar"
+          class="w-full h-[6vh] bg-[#6d7008] sticky top-0 z-50 flex justify-center items-center text-white" style="opacity: 0.95;">
+          <p class="cursor-pointer hover:underline px-2 md:px-4" onclick="scrollToSection('about')">About</p>
+          <p class="cursor-pointer hover:underline px-2 md:px-4" onclick="scrollToSection('skills')">Skills</p>
+          <p class="cursor-pointer hover:underline px-2 md:px-4" onclick="scrollToSection('experiences')">Experiences</p>
+          <p class="cursor-pointer hover:underline px-2 md:px-4" onclick="scrollToSection('protfolio')">Portfolio</p>
+          <p class="cursor-pointer hover:underline px-2 md:px-4" onclick="scrollToSection('contact')">Contact</p>
+        </div>
+      
+        <div class="absolute top-2 right-2 md:right-5 z-20">
+          <button id="resumeButton" class="bg-[#6d7008] text-white rounded font-bold transition hover:opacity-90">
+            Download My Resume
+          </button>
+        </div>
+      
+        <div>
+          <div id="about" class="section bg-white">
+            <div class="container w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+              <div id="aboutCard" class="bg-white rounded-lg p-6 md:p-8 lg:p-[20px]" style="box-shadow: 0 10px 30px rgba(109, 112, 8, 0.3);">
+                <div class="flex flex-col md:flex-row gap-5 items-start mb-6">
+                  <svg class="about-icon w-5 h-7 flex-shrink-0 mx-auto md:mx-0" fill="#6d7008" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 222.641 222.641" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <polygon points="111.315,0 95.19,27.94 127.445,27.94 "></polygon> <polygon points="127.445,32.595 95.19,32.595 111.315,60.526 "></polygon> <polygon points="95.19,222.641 127.445,222.641 111.315,194.701 "></polygon> <polygon points="33.054,63.812 0.801,63.819 16.929,91.747 "></polygon> <polygon points="53.215,94.082 37.091,66.144 20.96,94.076 "></polygon> <polygon points="169.424,161.168 185.548,189.097 201.685,161.163 "></polygon> <polygon points="189.579,191.426 221.834,191.432 205.716,163.492 "></polygon> <polygon points="0.801,191.432 33.054,191.426 16.923,163.492 "></polygon> <polygon points="37.091,189.103 53.215,161.168 20.96,161.163 "></polygon> <polygon points="185.548,66.138 169.424,94.082 201.673,94.076 "></polygon> <polygon points="221.84,63.819 189.579,63.812 205.704,91.752 "></polygon> <polygon points="131.323,88.466 147.317,60.75 115.316,60.75 "></polygon> <polygon points="107.319,60.75 75.318,60.75 91.316,88.466 "></polygon> <polygon points="71.32,63.056 55.316,90.771 87.317,90.771 "></polygon> <polygon points="111.321,63.056 95.317,90.771 127.315,90.771 "></polygon> <polygon points="167.319,90.771 151.313,63.056 135.318,90.771 "></polygon> <polygon points="135.318,95.391 151.313,123.11 167.319,95.391 "></polygon> <polygon points="87.317,95.391 55.316,95.391 71.32,123.11 "></polygon> <polygon points="51.315,97.702 35.312,125.415 67.312,125.415 "></polygon> <polygon points="171.321,97.702 155.32,125.415 187.321,125.415 "></polygon> <polygon points="171.321,157.747 187.321,130.037 155.32,130.037 "></polygon> <polygon points="51.315,157.747 67.312,130.037 35.312,130.037 "></polygon> <polygon points="71.32,132.348 55.316,160.063 87.317,160.063 "></polygon> <polygon points="135.318,160.063 167.319,160.063 151.313,132.348 "></polygon> <polygon points="151.313,192.395 167.319,164.68 135.318,164.68 "></polygon> <polygon points="111.321,192.395 127.315,164.68 95.317,164.68 "></polygon> <polygon points="55.316,164.68 71.32,192.395 87.317,164.68 "></polygon> <polygon points="91.316,166.991 75.318,194.701 107.319,194.701 "></polygon> <polygon points="115.316,194.701 147.317,194.701 131.323,166.991 "></polygon> </g> </g> </g></svg>
+                  <p class="text-left text-sm md:text-base lg:text-lg leading-relaxed">As a passionate and skilled Software Developer with over 2 years of experience, I specialize in both back-end and front-end development. I have extensive experience working with Python and the Django framework to build robust and scalable applications. On the front-end, I am proficient in HTML, CSS, Tailwind CSS, Bootstrap, JavaScript, and Vue.js, enabling me to create responsive, user-friendly web interfaces.
+                  </p>
+                </div>
+                <div class="flex flex-col md:flex-row gap-5 items-start mb-6">
+                  <svg class="about-icon w-5 h-7 flex-shrink-0 mx-auto md:mx-0" fill="#6d7008" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 222.641 222.641" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <polygon points="111.315,0 95.19,27.94 127.445,27.94 "></polygon> <polygon points="127.445,32.595 95.19,32.595 111.315,60.526 "></polygon> <polygon points="95.19,222.641 127.445,222.641 111.315,194.701 "></polygon> <polygon points="33.054,63.812 0.801,63.819 16.929,91.747 "></polygon> <polygon points="53.215,94.082 37.091,66.144 20.96,94.076 "></polygon> <polygon points="169.424,161.168 185.548,189.097 201.685,161.163 "></polygon> <polygon points="189.579,191.426 221.834,191.432 205.716,163.492 "></polygon> <polygon points="0.801,191.432 33.054,191.426 16.923,163.492 "></polygon> <polygon points="37.091,189.103 53.215,161.168 20.96,161.163 "></polygon> <polygon points="185.548,66.138 169.424,94.082 201.673,94.076 "></polygon> <polygon points="221.84,63.819 189.579,63.812 205.704,91.752 "></polygon> <polygon points="131.323,88.466 147.317,60.75 115.316,60.75 "></polygon> <polygon points="107.319,60.75 75.318,60.75 91.316,88.466 "></polygon> <polygon points="71.32,63.056 55.316,90.771 87.317,90.771 "></polygon> <polygon points="111.321,63.056 95.317,90.771 127.315,90.771 "></polygon> <polygon points="167.319,90.771 151.313,63.056 135.318,90.771 "></polygon> <polygon points="135.318,95.391 151.313,123.11 167.319,95.391 "></polygon> <polygon points="87.317,95.391 55.316,95.391 71.32,123.11 "></polygon> <polygon points="51.315,97.702 35.312,125.415 67.312,125.415 "></polygon> <polygon points="171.321,97.702 155.32,125.415 187.321,125.415 "></polygon> <polygon points="171.321,157.747 187.321,130.037 155.32,130.037 "></polygon> <polygon points="51.315,157.747 67.312,130.037 35.312,130.037 "></polygon> <polygon points="71.32,132.348 55.316,160.063 87.317,160.063 "></polygon> <polygon points="135.318,160.063 167.319,160.063 151.313,132.348 "></polygon> <polygon points="151.313,192.395 167.319,164.68 135.318,164.68 "></polygon> <polygon points="111.321,192.395 127.315,164.68 95.317,164.68 "></polygon> <polygon points="55.316,164.68 71.32,192.395 87.317,164.68 "></polygon> <polygon points="91.316,166.991 75.318,194.701 107.319,194.701 "></polygon> <polygon points="115.316,194.701 147.317,194.701 131.323,166.991 "></polygon> </g> </g> </g></svg>
+                  <p class="text-left text-sm md:text-base lg:text-lg leading-relaxed">I thrive on problem-solving and enjoy the challenge of turning complex requirements into efficient and effective code. My expertise in combining back-end logic with front-end design allows me to contribute to every stage of the software development lifecycle, ensuring seamless integration between systems and intuitive user experiences.
+                  </p>
+                </div>
+                <div class="flex flex-col md:flex-row gap-5 items-start mb-6">
+                  <svg class="about-icon w-5 h-7 flex-shrink-0 mx-auto md:mx-0" fill="#6d7008" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 222.641 222.641" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <polygon points="111.315,0 95.19,27.94 127.445,27.94 "></polygon> <polygon points="127.445,32.595 95.19,32.595 111.315,60.526 "></polygon> <polygon points="95.19,222.641 127.445,222.641 111.315,194.701 "></polygon> <polygon points="33.054,63.812 0.801,63.819 16.929,91.747 "></polygon> <polygon points="53.215,94.082 37.091,66.144 20.96,94.076 "></polygon> <polygon points="169.424,161.168 185.548,189.097 201.685,161.163 "></polygon> <polygon points="189.579,191.426 221.834,191.432 205.716,163.492 "></polygon> <polygon points="0.801,191.432 33.054,191.426 16.923,163.492 "></polygon> <polygon points="37.091,189.103 53.215,161.168 20.96,161.163 "></polygon> <polygon points="185.548,66.138 169.424,94.082 201.673,94.076 "></polygon> <polygon points="221.84,63.819 189.579,63.812 205.704,91.752 "></polygon> <polygon points="131.323,88.466 147.317,60.75 115.316,60.75 "></polygon> <polygon points="107.319,60.75 75.318,60.75 91.316,88.466 "></polygon> <polygon points="71.32,63.056 55.316,90.771 87.317,90.771 "></polygon> <polygon points="111.321,63.056 95.317,90.771 127.315,90.771 "></polygon> <polygon points="167.319,90.771 151.313,63.056 135.318,90.771 "></polygon> <polygon points="135.318,95.391 151.313,123.11 167.319,95.391 "></polygon> <polygon points="87.317,95.391 55.316,95.391 71.32,123.11 "></polygon> <polygon points="51.315,97.702 35.312,125.415 67.312,125.415 "></polygon> <polygon points="171.321,97.702 155.32,125.415 187.321,125.415 "></polygon> <polygon points="171.321,157.747 187.321,130.037 155.32,130.037 "></polygon> <polygon points="51.315,157.747 67.312,130.037 35.312,130.037 "></polygon> <polygon points="71.32,132.348 55.316,160.063 87.317,160.063 "></polygon> <polygon points="135.318,160.063 167.319,160.063 151.313,132.348 "></polygon> <polygon points="151.313,192.395 167.319,164.68 135.318,164.68 "></polygon> <polygon points="111.321,192.395 127.315,164.68 95.317,164.68 "></polygon> <polygon points="55.316,164.68 71.32,192.395 87.317,164.68 "></polygon> <polygon points="91.316,166.991 75.318,194.701 107.319,194.701 "></polygon> <polygon points="115.316,194.701 147.317,194.701 131.323,166.991 "></polygon> </g> </g> </g></svg>
+                  <p class="text-left text-sm md:text-base lg:text-lg leading-relaxed">With a strong understanding of SEO principles, I focus on creating optimized web applications that improve performance and enhance search engine visibility. Additionally, I am experienced with Version Control using GitLab and GitHub, as well as Database Management with PostgreSQL and SQL, ensuring efficient code collaboration and data handling.
+                  </p>
+                </div>
+                <div class="flex flex-col md:flex-row gap-5 items-start">
+                  <svg class="about-icon w-5 h-7 flex-shrink-0 mx-auto md:mx-0" fill="#6d7008" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 222.641 222.641" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <polygon points="111.315,0 95.19,27.94 127.445,27.94 "></polygon> <polygon points="127.445,32.595 95.19,32.595 111.315,60.526 "></polygon> <polygon points="95.19,222.641 127.445,222.641 111.315,194.701 "></polygon> <polygon points="33.054,63.812 0.801,63.819 16.929,91.747 "></polygon> <polygon points="53.215,94.082 37.091,66.144 20.96,94.076 "></polygon> <polygon points="169.424,161.168 185.548,189.097 201.685,161.163 "></polygon> <polygon points="189.579,191.426 221.834,191.432 205.716,163.492 "></polygon> <polygon points="0.801,191.432 33.054,191.426 16.923,163.492 "></polygon> <polygon points="37.091,189.103 53.215,161.168 20.96,161.163 "></polygon> <polygon points="185.548,66.138 169.424,94.082 201.673,94.076 "></polygon> <polygon points="221.84,63.819 189.579,63.812 205.704,91.752 "></polygon> <polygon points="131.323,88.466 147.317,60.75 115.316,60.75 "></polygon> <polygon points="107.319,60.75 75.318,60.75 91.316,88.466 "></polygon> <polygon points="71.32,63.056 55.316,90.771 87.317,90.771 "></polygon> <polygon points="111.321,63.056 95.317,90.771 127.315,90.771 "></polygon> <polygon points="167.319,90.771 151.313,63.056 135.318,90.771 "></polygon> <polygon points="135.318,95.391 151.313,123.11 167.319,95.391 "></polygon> <polygon points="87.317,95.391 55.316,95.391 71.32,123.11 "></polygon> <polygon points="51.315,97.702 35.312,125.415 67.312,125.415 "></polygon> <polygon points="171.321,97.702 155.32,125.415 187.321,125.415 "></polygon> <polygon points="171.321,157.747 187.321,130.037 155.32,130.037 "></polygon> <polygon points="51.315,157.747 67.312,130.037 35.312,130.037 "></polygon> <polygon points="71.32,132.348 55.316,160.063 87.317,160.063 "></polygon> <polygon points="135.318,160.063 167.319,160.063 151.313,132.348 "></polygon> <polygon points="151.313,192.395 167.319,164.68 135.318,164.68 "></polygon> <polygon points="111.321,192.395 127.315,164.68 95.317,164.68 "></polygon> <polygon points="55.316,164.68 71.32,192.395 87.317,164.68 "></polygon> <polygon points="91.316,166.991 75.318,194.701 107.319,194.701 "></polygon> <polygon points="115.316,194.701 147.317,194.701 131.323,166.991 "></polygon> </g> </g> </g></svg>
+                  <p class="text-left text-sm md:text-base lg:text-lg leading-relaxed">I'm always excited to work on new projects and help create amazing software solutions. If you're looking for a passionate and dedicated software developer to bring your ideas to life, feel free to reach out!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div id="skills" class="section bg-white">
+            <div class="container w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+              <div id="skillsCard" class="bg-white rounded-lg p-6 md:p-8 lg:p-[20px]" style="box-shadow: 0 10px 30px rgba(109, 112, 8, 0.3);">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-gray-800">Professional Skills</h2>
+              
+              <div class="mb-12 md:mb-16">
+                <h3 class="text-lg md:text-xl text-center text-gray-500 mb-6 md:mb-8">Top Skills</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-12">
+                  <div class="flex flex-col items-center text-center">
+                    <div class="relative w-24 h-24 md:w-32 md:h-32 mb-3 md:mb-4">
+                      <svg class="transform -rotate-90 w-full h-full">
+                        <circle cx="50%" cy="50%" r="45%" stroke="#e5e7eb" stroke-width="8" fill="none" />
+                        <circle class="skill-circle" cx="50%" cy="50%" r="45%" stroke="#6d7008" stroke-width="8" fill="none"
+                          stroke-dasharray="351.86" stroke-dashoffset="35.186" stroke-linecap="round" />
+                      </svg>
+                      <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="text-xl md:text-2xl font-bold text-gray-700">90%</span>
+                      </div>
+                    </div>
+                    <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-1 md:mb-2">Python & Django</h4>
+                    <p class="text-xs md:text-sm text-gray-500 mb-2 md:mb-3">Expert, 2 years</p>
+                    <p class="text-xs md:text-sm text-gray-600 max-w-xs">Extensive experience in building robust and scalable back-end applications using Python and Django framework.</p>
+                  </div>
+
+                  <div class="flex flex-col items-center text-center">
+                    <div class="relative w-24 h-24 md:w-32 md:h-32 mb-3 md:mb-4">
+                      <svg class="transform -rotate-90 w-full h-full">
+                        <circle cx="50%" cy="50%" r="45%" stroke="#e5e7eb" stroke-width="8" fill="none" />
+                        <circle class="skill-circle" cx="50%" cy="50%" r="45%" stroke="#6d7008" stroke-width="8" fill="none"
+                          stroke-dasharray="351.86" stroke-dashoffset="35.186" stroke-linecap="round" />
+                      </svg>
+                      <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="text-xl md:text-2xl font-bold text-gray-700">90%</span>
+                      </div>
+                    </div>
+                    <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-1 md:mb-2">JavaScript</h4>
+                    <p class="text-xs md:text-sm text-gray-500 mb-2 md:mb-3">Expert, 2 years</p>
+                    <p class="text-xs md:text-sm text-gray-600 max-w-xs">Proficient in modern JavaScript, creating dynamic and interactive web applications with excellent user experiences.</p>
+                  </div>
+
+                  <div class="flex flex-col items-center text-center">
+                    <div class="relative w-24 h-24 md:w-32 md:h-32 mb-3 md:mb-4">
+                      <svg class="transform -rotate-90 w-full h-full">
+                        <circle cx="50%" cy="50%" r="45%" stroke="#e5e7eb" stroke-width="8" fill="none" />
+                        <circle class="skill-circle" cx="50%" cy="50%" r="45%" stroke="#6d7008" stroke-width="8" fill="none"
+                          stroke-dasharray="351.86" stroke-dashoffset="35.186" stroke-linecap="round" />
+                      </svg>
+                      <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="text-xl md:text-2xl font-bold text-gray-700">90%</span>
+                      </div>
+                    </div>
+                    <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-1 md:mb-2">Vue.js</h4>
+                    <p class="text-xs md:text-sm text-gray-500 mb-2 md:mb-3">Advanced, 2 years</p>
+                    <p class="text-xs md:text-sm text-gray-600 max-w-xs">Building responsive single-page applications with Vue.js, utilizing component-based architecture effectively.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-lg md:text-xl text-center text-gray-500 mb-6 md:mb-8">Other Skills</h3>
+                <div class="flex flex-wrap justify-center gap-3 md:gap-4">
+                  <span class="skill-tag px-4 py-2 md:px-6 md:py-3 bg-white rounded-lg text-gray-700 font-medium transition" style="border: 2px solid #6d7008;">HTML5</span>
+                  <span class="skill-tag px-4 py-2 md:px-6 md:py-3 bg-white rounded-lg text-gray-700 font-medium transition" style="border: 2px solid #6d7008;">CSS3</span>
+                  <span class="skill-tag px-4 py-2 md:px-6 md:py-3 bg-white rounded-lg text-gray-700 font-medium transition" style="border: 2px solid #6d7008;">Tailwind CSS</span>
+                  <span class="skill-tag px-4 py-2 md:px-6 md:py-3 bg-white rounded-lg text-gray-700 font-medium transition" style="border: 2px solid #6d7008;">Bootstrap</span>
+                  <span class="skill-tag px-4 py-2 md:px-6 md:py-3 bg-white rounded-lg text-gray-700 font-medium transition" style="border: 2px solid #6d7008;">PostgreSQL</span>
+                  <span class="skill-tag px-4 py-2 md:px-6 md:py-3 bg-white rounded-lg text-gray-700 font-medium transition" style="border: 2px solid #6d7008;">SEO</span>
+                  <span class="skill-tag px-4 py-2 md:px-6 md:py-3 bg-white rounded-lg text-gray-700 font-medium transition" style="border: 2px solid #6d7008;">GitLab</span>
+                  <span class="skill-tag px-4 py-2 md:px-6 md:py-3 bg-white rounded-lg text-gray-700 font-medium transition" style="border: 2px solid #6d7008;">GitHub</span>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          
+          <div id="experiences" class="section bg-white">
+            <div class="container w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+              <div id="ExperinceCard" class="bg-white rounded-lg p-6 md:p-8 lg:p-[20px]" style="box-shadow: 0 10px 30px rgba(109, 112, 8, 0.3);">
+
+              <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-gray-800">Work Experiences</h2>
+              
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-content">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-3">
+                      <div class="mb-3 md:mb-0">
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-1">Software Developer</h3>
+                        <p class="text-sm text-gray-500 md:pr-16">June 2022 - Present</p>
+                      </div>
+                      <div class="text-left md:text-right">
+                        <p class="company-name text-base md:text-lg font-semibold" style="color: #6d7008;">Chadura Tech Private Limited</p>
+                        <p class="text-sm text-gray-500 flex items-center md:justify-end">
+                          <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                          </svg>
+                          Bengaluru
+                        </p>
+                      </div>
+                    </div>
+                    <p class="text-gray-700 mb-3 md:mb-4 text-left text-sm md:text-base">As a full-stack developer, I contributed to multiple projects across various domains, developing robust and scalable solutions using Python, Django, JavaScript, and Vue.js.</p>
+                    <ul class="text-left text-gray-600 list-disc pl-5 space-y-1 text-sm md:text-base">
+                      <li>Developed and maintained multiple web applications using Python, Django, and Vue.js</li>
+                      <li>Implemented responsive UI designs using HTML, CSS, Tailwind CSS, and Bootstrap</li>
+                      <li>Collaborated with cross-functional teams to define, design, and ship new features</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="timeline-item">
+                  <div class="timeline-content">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-3">
+                      <div class="mb-3 md:mb-0">
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-1">Software Developer Intern</h3>
+                        <p class="text-sm text-gray-500 md:pr-20">January 2022 - June 2022</p>
+                      </div>
+                      <div class="text-left md:text-right">
+                        <p class="company-name text-base md:text-lg font-semibold" style="color: #6d7008;">Chadura Tech Private Limited</p>
+                        <p class="text-sm text-gray-500 flex items-center md:justify-end">
+                          <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                          </svg>
+                          Bengaluru
+                        </p>
+                      </div>
+                    </div>
+                    <p class="text-gray-700 mb-3 md:mb-4 text-left text-sm md:text-base">During my internship, I gained hands-on experience in software development, working on real-world projects and learning industry best practices.</p>
+                    <ul class="text-left text-gray-600 list-disc pl-5 space-y-1 text-sm md:text-base">
+                      <li>Assisted in developing web applications using Python and Django framework</li>
+                      <li>Learned and applied front-end technologies including HTML, CSS, and JavaScript</li>
+                      <li>Gained experience with version control using Git and GitHub</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          
+        <div id="protfolio" class="section bg-white">
+          <div class="container w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+            <div id="ProtfolioCard" class="bg-white rounded-lg p-6 md:p-8 lg:p-[20px]" style="box-shadow: 0 10px 30px rgba(109, 112, 8, 0.3);">
+
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 md:mb-8 text-gray-800">Portfolio</h2>
+            
+            <div class="flex justify-center gap-4 md:gap-6 mb-8 md:mb-12 flex-wrap">
+              <button class="filter-btn active px-4 py-1.5 md:px-6 md:py-2 font-semibold text-xs md:text-sm uppercase transition-all" onclick="filterProjects('all')">ALL</button>
+              <button class="filter-btn px-4 py-1.5 md:px-6 md:py-2 font-semibold text-xs md:text-sm uppercase transition-all" onclick="filterProjects('backend')">BACK-END</button>
+              <button class="filter-btn px-4 py-1.5 md:px-6 md:py-2 font-semibold text-xs md:text-sm uppercase transition-all" onclick="filterProjects('frontend')">FRONT-END</button>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6" id="projectsGrid">
+
+              <!-- Genix AI -->
+              <div class="project-card" data-category="frontend backend">
+                <div class="project-image-wrapper rounded-t-lg overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=500&h=300&fit=crop"
+                       class="w-full h-40 md:h-48 object-cover" alt="Genix AI">
+                </div>
+                <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+                  <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Genix AI Platform</h3>
+                  <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
+                    Django · Vue.js · AI
+                  </p>
+                  <p class="text-white text-xs opacity-80">
+                    Full-stack AI healthcare & DNA reporting platform
+                  </p>
+                </div>
+              </div>
+            
+              <!-- Simul8Tech -->
+              <div class="project-card" data-category="frontend backend">
+                <div class="project-image-wrapper rounded-t-lg overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=500&h=300&fit=crop"
+                       class="w-full h-40 md:h-48 object-cover" alt="Simul8Tech">
+                </div>
+                <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+                  <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Simul8Tech Platform</h3>
+                  <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
+                    Django · JavaScript
+                  </p>
+                  <p class="text-white text-xs opacity-80">
+                    Business automation & workflow system
+                  </p>
+                </div>
+              </div>
+            
+              <!-- HRMS -->
+              <div class="project-card" data-category="backend">
+                <div class="project-image-wrapper rounded-t-lg overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=500&h=300&fit=crop"
+                       class="w-full h-40 md:h-48 object-cover" alt="HRMS">
+                </div>
+                <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+                  <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">HRMS Backend</h3>
+                  <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
+                    Django · PostgreSQL
+                  </p>
+                  <p class="text-white text-xs opacity-80">
+                    Employee, payroll & attendance management
+                  </p>
+                </div>
+              </div>
+            
+              <!-- LMS -->
+              <div class="project-card" data-category="backend">
+                <div class="project-image-wrapper rounded-t-lg overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&h=300&fit=crop"
+                       class="w-full h-40 md:h-48 object-cover" alt="LMS">
+                </div>
+                <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+                  <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">LMS Backend</h3>
+                  <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
+                    Django · REST API
+                  </p>
+                  <p class="text-white text-xs opacity-80">
+                    Course & learning management services
+                  </p>
+                </div>
+              </div>
+            
+              <!-- BillCostro -->
+              <div class="project-card" data-category="frontend">
+                <div class="project-image-wrapper rounded-t-lg overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500&h=300&fit=crop"
+                       class="w-full h-40 md:h-48 object-cover" alt="BillCostro">
+                </div>
+                <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+                  <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">BillCostro</h3>
+                  <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
+                    HTML · Tailwind · JS
+                  </p>
+                  <p class="text-white text-xs opacity-80">
+                    Billing & cost tracking UI
+                  </p>
+                </div>
+              </div>
+            
+              <!-- Mail Tracking -->
+              <div class="project-card" data-category="frontend">
+                <div class="project-image-wrapper rounded-t-lg overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=300&fit=crop"
+                       class="w-full h-40 md:h-48 object-cover" alt="Mail Tracking">
+                </div>
+                <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+                  <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Mail Tracking UI</h3>
+                  <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
+                    JavaScript · Frontend
+                  </p>
+                  <p class="text-white text-xs opacity-80">
+                    Email status & analytics dashboard
+                  </p>
+                </div>
+              </div>
+            
+              <!-- Bites -->
+              <div class="project-card" data-category="frontend">
+                <div class="project-image-wrapper rounded-t-lg overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&h=300&fit=crop"
+                       class="w-full h-40 md:h-48 object-cover" alt="Bites">
+                </div>
+                <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+                  <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Bites Web App</h3>
+                  <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
+                    HTML · CSS · JS
+                  </p>
+                  <p class="text-white text-xs opacity-80">
+                    Lightweight responsive frontend
+                  </p>
+                </div>
+              </div>
+            
+              <!-- Portfolio -->
+              <div class="project-card" data-category="frontend backend">
+                <div class="project-image-wrapper rounded-t-lg overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop"
+                       class="w-full h-40 md:h-48 object-cover" alt="Portfolio">
+                </div>
+                <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+                  <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Personal Portfolio</h3>
+                  <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
+                    Django · Tailwind
+                  </p>
+                  <p class="text-white text-xs opacity-80">
+                    Full-stack developer portfolio
+                  </p>
+                </div>
+              </div>
+            
+            </div>
+            
+          </div>
+        </div>
+        </div>
+          
+        <div id="contact" class="section bg-white">
+          <div class="container w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+            <div id="ContactCard" class="bg-white rounded-lg p-6 md:p-8 lg:p-[20px]" style="box-shadow: 0 10px 30px rgba(109, 112, 8, 0.3);">
+              
+              <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-gray-800">Get in Touch</h2>
+              
+              <div class="flex flex-col lg:flex-row items-start gap-6 md:gap-8">
+                <!-- Profile Image -->
+                <div class="flex-shrink-0 mx-auto lg:mx-0">
+                  <div class="w-36 h-36 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-gray-200">
+                    <img class="w-full h-full object-cover" src="/protfolio/image/yoga_1.png" alt="Yogalakshmi">
+                  </div>
+                </div>
+                
+                <!-- Contact Content -->
+                <div class="flex-1">
+                  <p class="text-gray-700 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
+                    I'm currently open to new opportunities and freelance work. Whether you need a full-stack solution, backend development, or frontend expertise, I'm here to help bring your ideas to life. With experience in building scalable applications and creating intuitive user interfaces, I focus on delivering high-quality solutions tailored to your needs.
+                  </p>
+                  
+                  <div class="mb-4 md:mb-6">
+                    <h3 class="text-base md:text-lg font-semibold text-gray-800 mb-3 md:mb-4">I can help with the following:</h3>
+                    <ul class="space-y-1 md:space-y-2">
+                      <li class="flex items-start">
+                        <svg class="checkmark-icon w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3 mt-0.5 flex-shrink-0" style="fill: #6d7008;" viewBox="0 0 20 20">
+                          <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                        </svg>
+                        <span class="text-gray-700 text-sm md:text-base">Full-stack development with Python, Django, and Vue.js</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="checkmark-icon w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3 mt-0.5 flex-shrink-0" style="fill: #6d7008;" viewBox="0 0 20 20">
+                          <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                        </svg>
+                        <span class="text-gray-700 text-sm md:text-base">Front-end development with HTML, CSS, JavaScript, and Tailwind CSS</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="checkmark-icon w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3 mt-0.5 flex-shrink-0" style="fill: #6d7008;" viewBox="0 0 20 20">
+                          <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                        </svg>
+                        <span class="text-gray-700 text-sm md:text-base">Back-end development with Django and PostgreSQL</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="checkmark-icon w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3 mt-0.5 flex-shrink-0" style="fill: #6d7008;" viewBox="0 0 20 20">
+                          <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                        </svg>
+                        <span class="text-gray-700 text-sm md:text-base">UI/UX design and responsive web development</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="checkmark-icon w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3 mt-0.5 flex-shrink-0" style="fill: #6d7008;" viewBox="0 0 20 20">
+                          <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                        </svg>
+                        <span class="text-gray-700 text-sm md:text-base">SEO optimization and web performance</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div class="mb-4 md:mb-6">
+                    <p class="text-gray-700 text-sm md:text-base">
+                      Drop me a line at 
+                      <a href="mailto:yogalakshmi.pa@gmail.com" class="font-semibold hover:underline company-name" style="color: #6d7008;">yogalakshmi.pa@gmail.com</a>
+                      or call me at 
+                      <a href="tel:+919444498837" class="font-semibold hover:underline company-name" style="color: #6d7008;">+91 9444498837</a>
+                    </p>
+                  </div>
+                  
+                  <!-- Social Media Links -->
+                  <div class="flex gap-3 md:gap-4 justify-center lg:justify-start">
+                    <a href="#" class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full border-2 hover:bg-gray-100 transition" style="border-color: #6d7008;">
+                      <svg class="social-icon w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                      </svg>
+                    </a>
+                    <a href="#" class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full border-2 hover:bg-gray-100 transition" style="border-color: #6d7008;">
+                      <svg class="social-icon w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                      </svg>
+                    </a>
+                    <a href="#" class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full border-2 hover:bg-gray-100 transition" style="border-color: #6d7008;">
+                      <svg class="social-icon w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24">
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        </div>
+  </div>
+
+<div class="color-picker-container fixed top-1/2 right-0 transform -translate-y-1/2 z-50">
+  <div class="flex justify-end cursor-pointer p-2 md:p-3" onclick="togglePopup()">
+    <svg id="colorPickerIcon" class="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="45" fill="#6d7008" stroke="#ffffff" stroke-width="3"/>
+      <circle cx="30" cy="30" r="8" fill="#ffffff"/>
+      <circle cx="70" cy="30" r="8" fill="#ffffff"/>
+      <circle cx="50" cy="50" r="8" fill="#ffffff"/>
+      <circle cx="30" cy="70" r="8" fill="#ffffff"/>
+      <circle cx="70" cy="70" r="8" fill="#ffffff"/>
+    </svg>
+  </div>
+
+  <div id="color" class="bg-black p-2 md:p-3 rounded-lg mt-2" style="display: block;">
+    <div class="grid grid-cols-3 gap-2">
+      <div class="color-picker" style="background-color: #001524;" onclick="changeColor('#001524')"></div>
+      <div class="color-picker" style="background-color: #5e3023;" onclick="changeColor('#5e3023')"></div>
+      <div class="color-picker" style="background-color: #2b1a12;" onclick="changeColor('#2b1a12')"></div>
+      <div class="color-picker" style="background-color: #69476d;" onclick="changeColor('#69476d')"></div>
+      <div class="color-picker" style="background-color: #7f5040;" onclick="changeColor('#7f5040')"></div>
+      <div class="color-picker" style="background-color: #494949;" onclick="changeColor('#494949')"></div>
+      <div class="color-picker" style="background-color: #6d7008;" onclick="changeColor('#6d7008')"></div>
+      <div class="color-picker" style="background-color: #133538;" onclick="changeColor('#133538')"></div>
+      <div class="color-picker" style="background-color: #902937;" onclick="changeColor('#902937')"></div>
+    </div>
+  </div>
+</div>
+
+<div id="scrollToTop" onclick="scrollToTop()">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
+    <g fill="none" fill-rule="evenodd">
+      <path d="m0 0h32v32h-32z"></path>
+      <path d="m16 0c8.836556 0 16 7.163444 16 16s-7.163444 16-16 16-16-7.163444-16-16 7.163444-16 16-16zm0 2c-7.7319865 0-14 6.2680135-14 14s6.2680135 14 14 14 14-6.2680135 14-14-6.2680135-14-14-14zm.0790314 9.1650801c.2359046.0138648.4678334.1109182.6480754.2911601l5.6568542 5.6568543c.3905243.3905243.3905243 1.0236893 0 1.4142135-.3905243.3905243-1.0236892.3905243-1.4142135 0l-4.9708933-4.9712279-4.9717474 4.9712279c-.3905243.3905243-1.0236893.3905243-1.41421358 0-.39052429-.3905242-.39052429-1.0236892 0-1.4142135l5.65685428-5.6568543c.1802419-.1802419.4121707-.2772953.6480754-.2911601z" fill="#ffffff" fill-rule="nonzero"></path>
+    </g>
+  </svg>
+</div>
+
+</div>
+
+  <script>
+    let currentColor = '#6d7008';
+
+    function hexToRgb(hex) {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    }
+
+    function changeColor(color) {
+      currentColor = color;
+      
+      document.documentElement.style.setProperty('--activeColor', color);
+      
+      const ids = ['colorSection', 'topBar', 'buttomBar', 'buttom1Bar', 'resumeButton', 'scrollToTop'];
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.backgroundColor = color;
+      });
+      
+      const colorPickerIcon = document.getElementById('colorPickerIcon');
+      if (colorPickerIcon) {
+        const mainCircle = colorPickerIcon.querySelector('circle[r="45"]');
+        if (mainCircle) mainCircle.setAttribute('fill', color);
+      }
+
+      const rgb = hexToRgb(color);
+      const cards = ['aboutCard', 'skillsCard', 'ExperinceCard', 'ProtfolioCard', 'ContactCard'];
+      cards.forEach(cardId => {
+        const card = document.getElementById(cardId);
+        if (card) {
+          card.style.boxShadow = `0 10px 30px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3)`;
+        }
+      });
+
+      const aboutIcons = document.querySelectorAll('.about-icon');
+      aboutIcons.forEach(icon => {
+        icon.setAttribute('fill', color);
+      });
+
+      const skillCircles = document.querySelectorAll('.skill-circle');
+      skillCircles.forEach(circle => {
+        circle.setAttribute('stroke', color);
+      });
+
+      const skillTags = document.querySelectorAll('.skill-tag');
+      skillTags.forEach(tag => {
+        tag.style.border = `2px solid ${color}`;
+      });
+
+      const companyNames = document.querySelectorAll('.company-name');
+      companyNames.forEach(name => {
+        name.style.color = color;
+      });
+
+      const projectContent = document.querySelectorAll('.project-content');
+      projectContent.forEach(content => {
+        content.style.backgroundColor = color;
+      });
+
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      filterButtons.forEach(button => {
+        button.style.borderColor = color;
+        button.style.color = color;
+        if (button.classList.contains('active')) {
+          button.style.backgroundColor = color;
+          button.style.color = 'white';
+        } else {
+          button.style.backgroundColor = 'white';
+          button.style.color = color;
+        }
+      });
+
+      const socialIcons = document.querySelectorAll('.social-icon');
+      socialIcons.forEach(icon => {
+        icon.style.fill = color;
+      });
+
+      const checkmarkIcons = document.querySelectorAll('.checkmark-icon');
+      checkmarkIcons.forEach(icon => {
+        icon.style.fill = color;
+      });
+
+      const socialLinks = document.querySelectorAll('#contact a[class*="border-2"]');
+      socialLinks.forEach(link => {
+        link.style.borderColor = color;
+      });
+
+      const timelineCircles = document.querySelectorAll('.timeline-item::after');
+      const timelineLine = document.querySelector('.timeline::before');
+      if (timelineLine) {
+        timelineLine.style.background = color;
+      }
+    }
+
+    function togglePopup() {
+      const popup = document.getElementById("color");
+      popup.classList.toggle('show');
+    }
+
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+      const navHeight = document.getElementById('buttomBar').offsetHeight;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - navHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+    window.addEventListener('scroll', function() {
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+      
+      if (scrollPosition > 300) {
+        scrollToTopBtn.style.display = 'flex';
+      } else {
+        scrollToTopBtn.style.display = 'none';
+      }
+    });
+
+    function filterProjects(category) {
+      const cards = document.querySelectorAll('.project-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+      
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.style.backgroundColor = 'white';
+        btn.style.color = currentColor;
+      });
+      
+      event.target.classList.add('active');
+      event.target.style.backgroundColor = currentColor;
+      event.target.style.color = 'white';
+      
+      cards.forEach(card => {
+        const categories = card.getAttribute('data-category');
+        if (category === 'all' || categories.includes(category)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Initialize filter buttons on load
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      filterButtons.forEach(button => {
+        button.style.borderColor = currentColor;
+        if (button.classList.contains('active')) {
+          button.style.backgroundColor = currentColor;
+          button.style.color = 'white';
+        } else {
+          button.style.color = currentColor;
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
