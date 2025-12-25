@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yogalakshmi - Portfolio</title>
+  <title>Yogalakshmi - Projects</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400&display=swap" rel="stylesheet">
@@ -55,6 +55,7 @@
       height: 17vh;
       position: relative;
       z-index: 30;
+      margin: 0 auto;
     }
 
     .profile-image-wrapper {
@@ -62,6 +63,34 @@
       height: 100%;
       position: relative;
       transform-style: preserve-3d;
+      transform: translateZ(-200px) rotateY(180deg) scale(0.5);
+      opacity: 0;
+      transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .profile-image-wrapper.animate {
+      transform: translateZ(0) rotateY(0deg) scale(1);
+      opacity: 1;
+    }
+
+    .profile-image-wrapper::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 1s ease;
+      transition-delay: 0.5s;
+    }
+
+    .profile-image-wrapper.animate::before {
+      opacity: 1;
+      transform: scale(1);
     }
 
     .profile-image {
@@ -70,7 +99,6 @@
       object-fit: contain;
       border-radius: 50%;
       border: 2px solid white;
-      box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
       transform: translateZ(-200px) rotateY(180deg);
       opacity: 0;
       transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -146,8 +174,8 @@
       position: relative;
     }
 
-    /* Project Cards - KEEP ANIMATIONS */
-    .project-card {
+    /* Projects Cards - KEEP ANIMATIONS */
+    .projects-card {
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       opacity: 0;
       transform: translateY(50px) scale(0.95);
@@ -157,7 +185,7 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
-    .project-card::before {
+    .projects-card::before {
       content: '';
       position: absolute;
       top: 0;
@@ -169,38 +197,38 @@
       z-index: 1;
     }
 
-    .project-card:hover::before {
+    .projects-card:hover::before {
       left: 100%;
     }
 
-    .project-card.animate {
+    .projects-card.animate {
       opacity: 1;
       transform: translateY(0) scale(1);
     }
 
-    .project-card:hover {
+    .projects-card:hover {
       transform: translateY(-10px) scale(1.02);
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
     }
 
-    .project-image-wrapper {
+    .projects-image-wrapper {
       overflow: hidden;
       position: relative;
       height: 200px;
     }
 
-    .project-image-wrapper img {
+    .projects-image-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.5s ease;
     }
 
-    .project-card:hover .project-image-wrapper img {
+    .projects-card:hover .projects-image-wrapper img {
       transform: scale(1.1);
     }
 
-    .project-image-wrapper::after {
+    .projects-image-wrapper::after {
       content: '';
       position: absolute;
       top: 0;
@@ -212,36 +240,88 @@
       transition: opacity 0.5s ease;
     }
 
-    .project-card:hover .project-image-wrapper::after {
+    .projects-card:hover .projects-image-wrapper::after {
       opacity: 1;
     }
 
-    .project-content {
+    .projects-content {
       transition: transform 0.5s ease;
       position: relative;
       z-index: 2;
     }
 
-    .project-card:hover .project-content {
+    .projects-card:hover .projects-content {
       transform: translateY(-5px);
     }
 
-    /* Skill Circle Animation - KEEP */
-    .skill-container {
-      perspective: 1000px;
-    }
+/* Add to your existing CSS */
+@media (min-width: 1024px) {
+  .skills-grid {
+    gap: 2rem;
+  }
+  
+  .skill-container {
+    padding: 0.5rem;
+  }
+  
+  .skill-value {
+    font-size: 1.875rem; /* 30px */
+  }
+}
 
-    .skill-circle {
-      transition: stroke-dashoffset 2s ease-in-out;
-      stroke-dasharray: 351.86;
-      stroke-dashoffset: 351.86;
-      transform-origin: center;
-    }
+@media (min-width: 1280px) {
+  .skill-value {
+    font-size: 2.25rem; /* 36px */
+  }
+  
+  .relative.w-24.h-24.md\:w-32.md\:h-32.lg\:w-40.lg\:h-40 {
+    width: 10rem; /* 160px */
+    height: 10rem;
+  }
+}
 
-    .skill-circle.animate {
-      stroke-dashoffset: 35.186;
-      animation: skillPulse 2s ease-in-out infinite;
-    }
+/* Update existing responsive styles */
+@media (max-width: 768px) {
+  .relative.w-24.h-24.md\:w-32.md\:h-32.lg\:w-40.lg\:h-40 {
+    width: 6rem;
+    height: 6rem;
+  }
+  
+  .skill-value {
+    font-size: 1.25rem; /* 20px */
+  }
+}
+
+@media (max-width: 480px) {
+  .relative.w-24.h-24.md\:w-32.md\:h-32.lg\:w-40.lg\:h-40 {
+    width: 5rem;
+    height: 5rem;
+  }
+  
+  .skill-value {
+    font-size: 1.125rem; /* 18px */
+  }
+}
+
+.skill-circle {
+  transition: stroke-dashoffset 2s ease-in-out;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+  transform-origin: center;
+}
+
+.skill-circle.animate {
+  stroke-dashoffset: calc(283 * (1 - 0.9)); /* 28.3 for 90% */
+  animation: skillPulse 2s ease-in-out infinite;
+}
+
+/* Make sure the SVG scales properly */
+svg {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
 
     @keyframes skillPulse {
       0%, 100% {
@@ -602,7 +682,7 @@
     }
 
     .filter-btn:hover {
-      color: white;
+      color: white !important;
       transform: translateY(-2px);
     }
 
@@ -613,10 +693,6 @@
         min-height: 40vh;
       }
 
-      .profile-animation-container {
-        width: 14vh;
-        height: 14vh;
-      }
 
       .profile-name {
         font-size: 38px;
@@ -626,7 +702,7 @@
         font-size: 20px;
       }
 
-      .project-image-wrapper {
+      .projects-image-wrapper {
         height: 180px;
       }
 
@@ -681,10 +757,6 @@
         min-height: 35vh;
       }
 
-      .profile-animation-container {
-        width: 12vh;
-        height: 12vh;
-      }
 
       .profile-name {
         font-size: 34px;
@@ -694,7 +766,7 @@
         font-size: 16px;
       }
 
-      .project-image-wrapper {
+      .projects-image-wrapper {
         height: 160px;
       }
 
@@ -770,6 +842,7 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
   </style>
 </head>
 
@@ -791,13 +864,16 @@
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.1) 100%); pointer-events: none;"></div>
     
         <div class="overlay-blocker absolute flex justify-center items-center w-full z-10"
-          style="top: -35px; height: 30vh;">
-          <div class="profile-animation-container">
-            <div class="border-2 border-white p-1 rounded-full profile-image-wrapper">
-              <img class="profile-image" src="/image/yoga_1.png" alt="Yogalakshmi">
-            </div>
-          </div>
-        </div>
+  style="top: -28px; height: 30vh;">
+  <div class="flex-shrink-0 mx-auto lg:mx-0 profile-animation-container">
+    <div class="profile-image-wrapper">
+      <img class="profile-image w-full h-full object-cover rounded-full border-4 border-gray-200" 
+           src="/image/yoga_1.png" 
+           alt="Yogalakshmi">
+    </div>
+  </div>
+</div>
+
     
         <div class="overlay-blocker absolute flex justify-center items-center w-full z-10"
           style="top: 0; height: 55vh;">
@@ -814,15 +890,15 @@
         <p class="cursor-pointer px-2 md:px-4 transition-all duration-300" onclick="scrollToSection('about')">About</p>
         <p class="cursor-pointer px-2 md:px-4 transition-all duration-300" onclick="scrollToSection('skills')">Skills</p>
         <p class="cursor-pointer px-2 md:px-4 transition-all duration-300" onclick="scrollToSection('experiences')">Experiences</p>
-        <p class="cursor-pointer px-2 md:px-4 transition-all duration-300" onclick="scrollToSection('protfolio')">Portfolio</p>
+        <p class="cursor-pointer px-2 md:px-4 transition-all duration-300" onclick="scrollToSection('projects')">Projects</p>
         <p class="cursor-pointer px-2 md:px-4 transition-all duration-300" onclick="scrollToSection('contact')">Contact</p>
       </div>
     
-      <div class="absolute top-1 right-2 md:right-5 z-20">
+      <a href="/Yogalakshmi_Cv.pdf" target="_blank" class="absolute top-1 right-2 md:right-5 z-20">
         <button id="resumeButton" class="bg-[#6d7008] text-white rounded font-bold transition hover:opacity-90 shadow-lg">
           Download My Resume
         </button>
-      </div>
+      </a>
     
       <div>
         <!-- About Section - Content remains the same -->
@@ -843,7 +919,7 @@
               </div>
               <div class="flex gap-5 items-start">
                 <svg class="about-icon w-5 h-7 flex-shrink-0 mx-auto md:mx-0" fill="#6d7008" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 222.641 222.641" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <polygon points="111.315,0 95.19,27.94 127.445,27.94 "></polygon> <polygon points="127.445,32.595 95.19,32.595 111.315,60.526 "></polygon> <polygon points="95.19,222.641 127.445,222.641 111.315,194.701 "></polygon> <polygon points="33.054,63.812 0.801,63.819 16.929,91.747 "></polygon> <polygon points="53.215,94.082 37.091,66.144 20.96,94.076 "></polygon> <polygon points="169.424,161.168 185.548,189.097 201.685,161.163 "></polygon> <polygon points="189.579,191.426 221.834,191.432 205.716,163.492 "></polygon> <polygon points="0.801,191.432 33.054,191.426 16.923,163.492 "></polygon> <polygon points="37.091,189.103 53.215,161.168 20.96,161.163 "></polygon> <polygon points="185.548,66.138 169.424,94.082 201.673,94.076 "></polygon> <polygon points="221.84,63.819 189.579,63.812 205.704,91.752 "></polygon> <polygon points="131.323,88.466 147.317,60.75 115.316,60.75 "></polygon> <polygon points="107.319,60.75 75.318,60.75 91.316,88.466 "></polygon> <polygon points="71.32,63.056 55.316,90.771 87.317,90.771 "></polygon> <polygon points="111.321,63.056 95.317,90.771 127.315,90.771 "></polygon> <polygon points="167.319,90.771 151.313,63.056 135.318,90.771 "></polygon> <polygon points="135.318,95.391 151.313,123.11 167.319,95.391 "></polygon> <polygon points="87.317,95.391 55.316,95.391 71.32,123.11 "></polygon> <polygon points="51.315,97.702 35.312,125.415 67.312,125.415 "></polygon> <polygon points="171.321,97.702 155.32,125.415 187.321,125.415 "></polygon> <polygon points="171.321,157.747 187.321,130.037 155.32,130.037 "></polygon> <polygon points="51.315,157.747 67.312,130.037 35.312,130.037 "></polygon> <polygon points="71.32,132.348 55.316,160.063 87.317,160.063 "></polygon> <polygon points="135.318,160.063 167.319,160.063 151.313,132.348 "></polygon> <polygon points="151.313,192.395 167.319,164.68 135.318,164.68 "></polygon> <polygon points="111.321,192.395 127.315,164.68 95.317,164.68 "></polygon> <polygon points="55.316,164.68 71.32,192.395 87.317,164.68 "></polygon> <polygon points="91.316,166.991 75.318,194.701 107.319,194.701 "></polygon> <polygon points="115.316,194.701 147.317,194.701 131.323,166.991 "></polygon> </g> </g> </g></svg>
-                <p class="text-left text-sm md:text-base lg:text-lg leading-relaxed">I'm always excited to work on new projects and help create amazing software solutions. If you're looking for a passionate and dedicated software developer to bring your ideas to life, feel free to reach out!</p>
+                <p class="text-left text-sm md:text-base lg:text-lg leading-relaxed">I'm always excited to work on new projectss and help create amazing software solutions. If you're looking for a passionate and dedicated software developer to bring your ideas to life, feel free to reach out!</p>
               </div>
             </div>
           </div>
@@ -854,58 +930,61 @@
             <div id="skillsCard" class="section-card right bg-white rounded-lg p-6 md:p-8 lg:p-[20px]" style="box-shadow: 0 10px 30px rgba(109, 112, 8, 0.3);">
               <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-gray-800">Professional Skills</h2>
             
-            <div class="mb-12 md:mb-16">
-              <h3 class="text-lg md:text-xl text-center text-gray-500 mb-6 md:mb-8">Top Skills</h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-12">
-                <div class="flex flex-col items-center text-center skill-container">
-                  <div class="relative w-24 h-24 md:w-32 md:h-32 mb-3 md:mb-4">
-                    <svg class="transform -rotate-90 w-full h-full">
-                      <circle cx="50%" cy="50%" r="45%" stroke="#e5e7eb" stroke-width="8" fill="none" />
-                      <circle class="skill-circle" cx="50%" cy="50%" r="45%" stroke="#6d7008" stroke-width="8" fill="none"
-                        stroke-dasharray="351.86" stroke-dashoffset="35.186" stroke-linecap="round" />
-                    </svg>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                      <span class="skill-value text-xl md:text-2xl font-bold text-gray-700">90%</span>
-                    </div>
-                  </div>
-                  <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-1 md:mb-2">Python & Django</h4>
-                  <p class="text-xs md:text-sm text-gray-500 mb-2 md:mb-3">Expert, 2 years</p>
-                  <p class="text-xs md:text-sm text-gray-600 max-w-xs">Extensive experience in building robust and scalable back-end applications using Python and Django framework.</p>
-                </div>
+<div class="mb-12 md:mb-16">
+  <h3 class="text-lg md:text-xl text-center text-gray-500 mb-6 md:mb-8">Top Skills</h3>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-12">
+    <!-- Python & Django -->
+    <div class="flex flex-col items-center text-center skill-container">
+      <div class="relative w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 mb-3 md:mb-4">
+        <svg class="transform -rotate-90 w-full h-full" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" stroke="#e5e7eb" stroke-width="8" fill="none" />
+          <circle class="skill-circle" cx="50" cy="50" r="45" stroke="#6d7008" stroke-width="8" fill="none"
+            stroke-dasharray="283" stroke-dashoffset="283" stroke-linecap="round" />
+        </svg>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="skill-value text-xl md:text-2xl lg:text-3xl font-bold text-gray-700">90%</span>
+        </div>
+      </div>
+      <h4 class="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 mb-1 md:mb-2">Python & Django</h4>
+      <p class="text-xs md:text-sm lg:text-base text-gray-500 mb-2 md:mb-3">Expert, 2 years</p>
+      <p class="text-xs md:text-sm lg:text-base text-gray-600 max-w-xs lg:max-w-sm">Extensive experience in building robust and scalable back-end applications using Python and Django framework.</p>
+    </div>
 
-                <div class="flex flex-col items-center text-center skill-container">
-                  <div class="relative w-24 h-24 md:w-32 md:h-32 mb-3 md:mb-4">
-                    <svg class="transform -rotate-90 w-full h-full">
-                      <circle cx="50%" cy="50%" r="45%" stroke="#e5e7eb" stroke-width="8" fill="none" />
-                      <circle class="skill-circle" cx="50%" cy="50%" r="45%" stroke="#6d7008" stroke-width="8" fill="none"
-                        stroke-dasharray="351.86" stroke-dashoffset="35.186" stroke-linecap="round" />
-                    </svg>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                      <span class="skill-value text-xl md:text-2xl font-bold text-gray-700">90%</span>
-                    </div>
-                  </div>
-                  <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-1 md:mb-2">JavaScript</h4>
-                  <p class="text-xs md:text-sm text-gray-500 mb-2 md:mb-3">Expert, 2 years</p>
-                  <p class="text-xs md:text-sm text-gray-600 max-w-xs">Proficient in modern JavaScript, creating dynamic and interactive web applications with excellent user experiences.</p>
-                </div>
+    <!-- JavaScript -->
+    <div class="flex flex-col items-center text-center skill-container">
+      <div class="relative w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 mb-3 md:mb-4">
+        <svg class="transform -rotate-90 w-full h-full" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" stroke="#e5e7eb" stroke-width="8" fill="none" />
+          <circle class="skill-circle" cx="50" cy="50" r="45" stroke="#6d7008" stroke-width="8" fill="none"
+            stroke-dasharray="283" stroke-dashoffset="283" stroke-linecap="round" />
+        </svg>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="skill-value text-xl md:text-2xl lg:text-3xl font-bold text-gray-700">90%</span>
+        </div>
+      </div>
+      <h4 class="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 mb-1 md:mb-2">JavaScript</h4>
+      <p class="text-xs md:text-sm lg:text-base text-gray-500 mb-2 md:mb-3">Expert, 2 years</p>
+      <p class="text-xs md:text-sm lg:text-base text-gray-600 max-w-xs lg:max-w-sm">Proficient in modern JavaScript, creating dynamic and interactive web applications with excellent user experiences.</p>
+    </div>
 
-                <div class="flex flex-col items-center text-center skill-container">
-                  <div class="relative w-24 h-24 md:w-32 md:h-32 mb-3 md:mb-4">
-                    <svg class="transform -rotate-90 w-full h-full">
-                      <circle cx="50%" cy="50%" r="45%" stroke="#e5e7eb" stroke-width="8" fill="none" />
-                      <circle class="skill-circle" cx="50%" cy="50%" r="45%" stroke="#6d7008" stroke-width="8" fill="none"
-                        stroke-dasharray="351.86" stroke-dashoffset="35.186" stroke-linecap="round" />
-                    </svg>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                      <span class="skill-value text-xl md:text-2xl font-bold text-gray-700">90%</span>
-                    </div>
-                  </div>
-                  <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-1 md:mb-2">Vue.js</h4>
-                  <p class="text-xs md:text-sm text-gray-500 mb-2 md:mb-3">Advanced, 2 years</p>
-                  <p class="text-xs md:text-sm text-gray-600 max-w-xs">Building responsive single-page applications with Vue.js, utilizing component-based architecture effectively.</p>
-                </div>
-              </div>
-            </div>
+    <!-- Vue.js -->
+    <div class="flex flex-col items-center text-center skill-container">
+      <div class="relative w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 mb-3 md:mb-4">
+        <svg class="transform -rotate-90 w-full h-full" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" stroke="#e5e7eb" stroke-width="8" fill="none" />
+          <circle class="skill-circle" cx="50" cy="50" r="45" stroke="#6d7008" stroke-width="8" fill="none"
+            stroke-dasharray="283" stroke-dashoffset="283" stroke-linecap="round" />
+        </svg>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="skill-value text-xl md:text-2xl lg:text-3xl font-bold text-gray-700">90%</span>
+        </div>
+      </div>
+      <h4 class="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 mb-1 md:mb-2">Vue.js</h4>
+      <p class="text-xs md:text-sm lg:text-base text-gray-500 mb-2 md:mb-3">Advanced, 2 years</p>
+      <p class="text-xs md:text-sm lg:text-base text-gray-600 max-w-xs lg:max-w-sm">Building responsive single-page applications with Vue.js, utilizing component-based architecture effectively.</p>
+    </div>
+  </div>
+</div>
 
             <div>
               <h3 class="text-lg md:text-xl text-center text-gray-500 mb-6 md:mb-8">Other Skills</h3>
@@ -949,7 +1028,7 @@
                       </p>
                     </div>
                   </div>
-                  <p class="text-gray-700 mb-3 md:mb-4 text-left text-sm md:text-base">As a full-stack developer, I contributed to multiple projects across various domains, developing robust and scalable solutions using Python, Django, JavaScript, and Vue.js.</p>
+                  <p class="text-gray-700 mb-3 md:mb-4 text-left text-sm md:text-base">As a full-stack developer, I contributed to multiple projectss across various domains, developing robust and scalable solutions using Python, Django, JavaScript, and Vue.js.</p>
                   <ul class="text-left text-gray-600 list-disc pl-5 space-y-1 text-sm md:text-base">
                     <li>Developed and maintained multiple web applications using Python, Django, and Vue.js</li>
                     <li>Implemented responsive UI designs using HTML, CSS, Tailwind CSS, and Bootstrap</li>
@@ -975,7 +1054,7 @@
                       </p>
                     </div>
                   </div>
-                  <p class="text-gray-700 mb-3 md:mb-4 text-left text-sm md:text-base">During my internship, I gained hands-on experience in software development, working on real-world projects and learning industry best practices.</p>
+                  <p class="text-gray-700 mb-3 md:mb-4 text-left text-sm md:text-base">During my internship, I gained hands-on experience in software development, working on real-world projectss and learning industry best practices.</p>
                   <ul class="text-left text-gray-600 list-disc pl-5 space-y-1 text-sm md:text-base">
                     <li>Assisted in developing web applications using Python and Django framework</li>
                     <li>Learned and applied front-end technologies including HTML, CSS, and JavaScript</li>
@@ -988,154 +1067,153 @@
         </div>
         </div>
         
-      <!-- Portfolio Section -->
-      <div id="protfolio" class="section bg-white">
+      <!-- Projects Section -->
+      <div id="projects" class="section bg-white">
         <div class="container w-full md:max-w-6xl max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
-          <div id="ProtfolioCard" class="section-card right bg-white rounded-lg p-6 md:p-8 lg:p-[20px]" style="box-shadow: 0 10px 30px rgba(109, 112, 8, 0.3);">
+          <div id="projectsCard" class="section-card right bg-white rounded-lg p-6 md:p-8 lg:p-[20px]" style="box-shadow: 0 10px 30px rgba(109, 112, 8, 0.3);">
 
-          <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 md:mb-8 text-gray-800">Portfolio</h2>
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 md:mb-8 text-gray-800">Projects</h2>
           
           <div class="flex justify-center gap-4 md:gap-6 mb-8 md:mb-12 flex-wrap">
-            <button class="filter-btn active px-4 py-1.5 md:px-6 md:py-2 font-semibold text-xs md:text-sm uppercase transition-all" onclick="filterProjects('all')">ALL</button>
-            <button class="filter-btn px-4 py-1.5 md:px-6 md:py-2 font-semibold text-xs md:text-sm uppercase transition-all" onclick="filterProjects('backend')">BACK-END</button>
-            <button class="filter-btn px-4 py-1.5 md:px-6 md:py-2 font-semibold text-xs md:text-sm uppercase transition-all" onclick="filterProjects('frontend')">FRONT-END</button>
+            <button class="filter-btn active px-4 py-1.5 md:px-6 md:py-2 font-semibold text-xs md:text-sm uppercase transition-all" onclick="filterProjectss('all')">ALL</button>
+            <button class="filter-btn px-4 py-1.5 md:px-6 md:py-2 font-semibold text-xs md:text-sm uppercase transition-all" onclick="filterProjectss('backend')">BACK-END</button>
+            <button class="filter-btn px-4 py-1.5 md:px-6 md:py-2 font-semibold text-xs md:text-sm uppercase transition-all" onclick="filterProjectss('frontend')">FRONT-END</button>
           </div>
           
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6" id="projectsGrid">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 md:gap-6" id="projectssGrid">
 
             <!-- Genix AI -->
-            <div class="project-card" data-category="frontend backend">
-              <div class="project-image-wrapper rounded-t-lg overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=500&h=300&fit=crop"
+            <div class="projects-card" data-category="frontend backend">
+              <div class="projects-image-wrapper rounded-t-lg overflow-hidden">
+                <img src="https://w0.peakpx.com/wallpaper/537/562/HD-wallpaper-dna-methylation-art-design-fantasy-painting.jpg"
                      class="w-full h-full object-cover" alt="Genix AI">
               </div>
-              <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+              <div class="projects-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
                 <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Genix AI Platform</h3>
                 <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
-                  Django · Vue.js · AI
+                  Django · JavaScript · AI
                 </p>
                 <p class="text-white text-xs opacity-80">
-                  Full-stack AI healthcare & DNA reporting platform
+                  Built the full-stack platform, including responsive web and mobile apps, RESTful APIs, and automated report generation; implemented secure multi-user workflows and SEO-friendly landing pages to enhance user engagement and personalized DNA insights.
                 </p>
               </div>
             </div>
           
             <!-- Simul8Tech -->
-            <div class="project-card" data-category="frontend backend">
-              <div class="project-image-wrapper rounded-t-lg overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=500&h=300&fit=crop"
+            <div class="projects-card" data-category="frontend backend">
+              <div class="projects-image-wrapper rounded-t-lg overflow-hidden">
+                <img src="https://img.freepik.com/premium-photo/group-friends-playing-board-game-table_14117-1166553.jpg"
                      class="w-full h-full object-cover" alt="Simul8Tech">
               </div>
-              <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
-                <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Simul8Tech Platform</h3>
+              <div class="projects-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+                <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Simul8Tech Game</h3>
                 <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
                   Django · JavaScript
                 </p>
                 <p class="text-white text-xs opacity-80">
-                  Business automation & workflow system
+                  Developed full-stack features for real-time multiplayer games, including backend logic for sessions, scoring, and player interactions; designed responsive, engaging interfaces and ensured stable performance under concurrent usage.
                 </p>
               </div>
             </div>
           
             <!-- HRMS -->
-            <div class="project-card" data-category="backend">
-              <div class="project-image-wrapper rounded-t-lg overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=500&h=300&fit=crop"
+            <div class="projects-card" data-category="backend">
+              <div class="projects-image-wrapper rounded-t-lg overflow-hidden">
+                <img src="https://www.instanceit.com/assets/images/services/hrms/hrms-overview.webp"
                      class="w-full h-full object-cover" alt="HRMS">
               </div>
-              <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+              <div class="projects-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
                 <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">HRMS Backend</h3>
                 <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
                   Django · PostgreSQL
                 </p>
                 <p class="text-white text-xs opacity-80">
-                  Employee, payroll & attendance management
+                  Created backend APIs for employee management, attendance, payroll, and role-based access. Ensured secure authentication, optimized performance, and smooth integration with frontend applications, improving overall system reliability.
                 </p>
               </div>
             </div>
           
             <!-- LMS -->
-            <div class="project-card" data-category="backend">
-              <div class="project-image-wrapper rounded-t-lg overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&h=300&fit=crop"
+            <div class="projects-card" data-category="backend">
+              <div class="projects-image-wrapper rounded-t-lg overflow-hidden">
+                <img src="https://t4.ftcdn.net/jpg/04/60/23/37/360_F_460233735_3q7EPRIRdlLIQZYK2ucez8QY8PC53bWA.jpg"
                      class="w-full h-full object-cover" alt="LMS">
               </div>
-              <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+              <div class="projects-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
                 <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">LMS Backend</h3>
                 <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
                   Django · REST API
                 </p>
                 <p class="text-white text-xs opacity-80">
-                  Course & learning management services
+                  Created backend APIs for course management, user enrollment, progress tracking, and role-based access. Ensured secure authentication, optimized performance, and smooth integration with frontend applications, improving overall system reliability.
                 </p>
               </div>
             </div>
           
             <!-- BillCostro -->
-            <div class="project-card" data-category="frontend">
-              <div class="project-image-wrapper rounded-t-lg overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500&h=300&fit=crop"
+            <div class="projects-card" data-category="frontend">
+              <div class="projects-image-wrapper rounded-t-lg overflow-hidden">
+                <img src="https://media.istockphoto.com/id/2044524147/photo/businessman-use-computer-to-analyze-enterprise-payments-for-cost-reduction-lean-optimize.jpg?s=612x612&w=0&k=20&c=SEACtLsSdOUdPNqh7Gaok6IN-a55RnxwzKaRnOXf4EU="
                      class="w-full h-full object-cover" alt="BillCostro">
               </div>
-              <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+              <div class="projects-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
                 <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">BillCostro</h3>
                 <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
                   HTML · Tailwind · JS
                 </p>
                 <p class="text-white text-xs opacity-80">
-                  Billing & cost tracking UI
+                  Built the frontend for BillCostro, handling website interactions and UI features; simplified budget planning, expense tracking, and travel request workflows while ensuring responsive design and smooth user experience across devices.
                 </p>
               </div>
             </div>
           
             <!-- Mail Tracking -->
-            <div class="project-card" data-category="frontend">
-              <div class="project-image-wrapper rounded-t-lg overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=300&fit=crop"
+            <div class="projects-card" data-category="frontend">
+              <div class="projects-image-wrapper rounded-t-lg overflow-hidden">
+                <img src="https://www.cirrusinsight.com/hubfs/Imported_Blog_Media/email-tool-tracking.jpg"
                      class="w-full h-full object-cover" alt="Mail Tracking">
               </div>
-              <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
-                <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Mail Tracking UI</h3>
+              <div class="projects-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+                <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Mail Tracking</h3>
                 <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
-                  JavaScript · Frontend
+                  HTML · Tailwind · VueJS 
                 </p>
                 <p class="text-white text-xs opacity-80">
-                  Email status & analytics dashboard
+                  Built the frontend and backend for Mail Tracking, including bulk email processing with Celery, scheduling, campaign management, and error handling; integrated database storage for templates, recipients, and logs while maintaining a responsive and user-friendly dashboard.
                 </p>
               </div>
             </div>
           
             <!-- Bites -->
-            <div class="project-card" data-category="frontend">
-              <div class="project-image-wrapper rounded-t-lg overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&h=300&fit=crop"
+            <div class="projects-card" data-category="frontend">
+              <div class="projects-image-wrapper rounded-t-lg overflow-hidden">
+                <img src="https://www.allcargogroup.in/compass/wp-content/uploads/2022/07/Cust_UYVHFDRSPK.jpg"
                      class="w-full h-full object-cover" alt="Bites">
               </div>
-              <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+              <div class="projects-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
                 <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Bites Web App</h3>
                 <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
                   HTML · CSS · JS
                 </p>
                 <p class="text-white text-xs opacity-80">
-                  Lightweight responsive frontend
+                  Developed the frontend for Bites Web App, a platform by the Government of Karnataka with educational institutions and IT industries; focused on responsive layouts, interactive features, and smooth experience for managing IT education standards and resources.
                 </p>
               </div>
             </div>
           
-            <!-- Portfolio -->
-            <div class="project-card" data-category="frontend backend">
-              <div class="project-image-wrapper rounded-t-lg overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop"
-                     class="w-full h-full object-cover" alt="Portfolio">
+            <!-- Projects -->
+            <div class="projects-card" data-category="frontend backend">
+              <div class="projects-image-wrapper rounded-t-lg overflow-hidden">
+                <img src="https://st2.depositphotos.com/1032577/6582/i/450/depositphotos_65828845-stock-photo-Projects-written-on-notebook.jpg"
+                     class="w-full h-full object-cover" alt="Projects">
               </div>
-              <div class="project-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
-                <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Personal Portfolio</h3>
+              <div class="projects-content p-4 md:p-5 rounded-b-lg" style="background-color: #6d7008;" >
+                <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Personal Portfolios</h3>
                 <p class="text-white text-xs md:text-sm mb-2 md:mb-3 opacity-90">
                   Django · Tailwind
                 </p>
                 <p class="text-white text-xs opacity-80">
-                  Full-stack developer portfolio
-                </p>
+Built a full-stack Projects for freelancing using Django and Tailwind; implemented responsive design, dynamic content, and navigation to showcase projectss, skills, and client work; added contact forms, filters, and interactive elements.                </p>
               </div>
             </div>
           
@@ -1155,10 +1233,10 @@
             <div class="flex flex-col lg:flex-row items-start gap-6 md:gap-8">
               <!-- Profile Image -->
               <div class="flex-shrink-0 mx-auto lg:mx-0 contact-image">
-                <div class="w-36 h-36 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-gray-200">
-                  <img class="w-full h-full object-cover" src="/image/yoga_1.png" alt="Yogalakshmi">
-                </div>
-              </div>
+  <div class="w-36 h-36 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-gray-200">
+    <img class="w-full h-full object-cover" src="/image/yoga_1.png" alt="Yogalakshmi">
+  </div>
+</div>
               
               <!-- Contact Content -->
               <div class="flex-1 contact-content">
@@ -1240,7 +1318,7 @@
   </div>
 
   <!-- Color Picker -->
-  <div class="color-picker-container fixed top-1/2 right-0 transform -translate-y-1/2 z-50">
+  <div class="color-picker-container fixed top-1/2 right-0 transform md:-translate-y-1/2 -translate-y-[95%] z-50">
     <div class="flex justify-end cursor-pointer p-2 md:p-3" onclick="togglePopup()">
       <svg id="colorPickerIcon" class="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <circle cx="50" cy="50" r="45" fill="#6d7008" stroke="#ffffff" stroke-width="3"/>
@@ -1282,37 +1360,39 @@
   <script>
     // Remove loading animation and trigger profile image animation
     window.addEventListener('load', function() {
-      setTimeout(() => {
-        const loading = document.getElementById('loadingAnimation');
-        loading.style.opacity = '0';
+  setTimeout(() => {
+    const loading = document.getElementById('loadingAnimation');
+    loading.style.opacity = '0';
+    setTimeout(() => {
+      loading.style.display = 'none';
+      
+      // Trigger profile image animation after loading is done
+      const profileWrapper = document.querySelector('.profile-image-wrapper');
+      const profileImage = document.querySelector('.profile-image');
+      const profileName = document.querySelector('.profile-name');
+      const profileTitle = document.querySelector('.profile-title');
+      
+      if (profileWrapper && profileImage) {
         setTimeout(() => {
-          loading.style.display = 'none';
-          
-          // Trigger profile image animation after loading is done
-          const profileImage = document.querySelector('.profile-image');
-          const profileName = document.querySelector('.profile-name');
-          const profileTitle = document.querySelector('.profile-title');
-          
-          if (profileImage) {
-            setTimeout(() => {
-              profileImage.classList.add('animate');
-            }, 200);
-          }
-          
-          if (profileName) {
-            setTimeout(() => {
-              profileName.classList.add('animate');
-            }, 500);
-          }
-          
-          if (profileTitle) {
-            setTimeout(() => {
-              profileTitle.classList.add('animate');
-            }, 800);
-          }
+          profileWrapper.classList.add('animate');
+          profileImage.classList.add('animate');
+        }, 200);
+      }
+      
+      if (profileName) {
+        setTimeout(() => {
+          profileName.classList.add('animate');
         }, 500);
-      }, 1000);
-    });
+      }
+      
+      if (profileTitle) {
+        setTimeout(() => {
+          profileTitle.classList.add('animate');
+        }, 800);
+      }
+    }, 500);
+  }, 1000);
+});
 
     // Animation Observer for sections
     const observerOptions = {
@@ -1328,23 +1408,27 @@
           if (entry.target.id === 'about') {
             const aboutCard = document.getElementById('aboutCard');
             if (aboutCard) setTimeout(() => aboutCard.classList.add('animate'), 200);
-          } else if (entry.target.id === 'skills') {
-            const skillsCard = document.getElementById('skillsCard');
-            const skillCircles = document.querySelectorAll('.skill-circle');
-            const skillValues = document.querySelectorAll('.skill-value');
-            
-            if (skillsCard) setTimeout(() => skillsCard.classList.add('animate'), 200);
-            
-            setTimeout(() => {
-              skillCircles.forEach(circle => {
-                circle.classList.add('animate');
-              });
-              
-              skillValues.forEach(value => {
-                value.classList.add('animate');
-              });
-            }, 400);
-          } else if (entry.target.id === 'experiences') {
+         } else if (entry.target.id === 'skills') {
+  const skillsCard = document.getElementById('skillsCard');
+  const skillCircles = document.querySelectorAll('.skill-circle');
+  const skillValues = document.querySelectorAll('.skill-value');
+  
+  if (skillsCard) setTimeout(() => skillsCard.classList.add('animate'), 200);
+  
+  setTimeout(() => {
+    skillCircles.forEach(circle => {
+      // Calculate 90% offset: circumference * (1 - 0.9)
+      // circumference = 2 * π * r = 2 * 3.14159 * 45 = ~283
+      const offset = 283 * (1 - 0.9); // 28.3
+      circle.style.strokeDashoffset = offset;
+      circle.classList.add('animate');
+    });
+    
+    skillValues.forEach(value => {
+      value.classList.add('animate');
+    });
+  }, 400);
+}else if (entry.target.id === 'experiences') {
             const experienceCard = document.getElementById('ExperinceCard');
             const timeline = document.querySelector('.timeline');
             const timelineItems = document.querySelectorAll('.timeline-item');
@@ -1360,13 +1444,13 @@
                 item.classList.add('animate');
               }, 600 + (index * 300));
             });
-          } else if (entry.target.id === 'protfolio') {
-            const portfolioCard = document.getElementById('ProtfolioCard');
-            const projectCards = document.querySelectorAll('.project-card');
+          } else if (entry.target.id === 'projects') {
+            const ProjectsCard = document.getElementById('projectsCard');
+            const projectsCards = document.querySelectorAll('.projects-card');
             
-            if (portfolioCard) setTimeout(() => portfolioCard.classList.add('animate'), 200);
+            if (ProjectsCard) setTimeout(() => ProjectsCard.classList.add('animate'), 200);
             
-            projectCards.forEach((card, index) => {
+            projectsCards.forEach((card, index) => {
               setTimeout(() => {
                 card.classList.add('animate');
               }, 400 + (index * 100));
@@ -1432,7 +1516,7 @@
 
       // Update card shadows
       const rgb = hexToRgb(color);
-      const cards = ['aboutCard', 'skillsCard', 'ExperinceCard', 'ProtfolioCard', 'ContactCard'];
+      const cards = ['aboutCard', 'skillsCard', 'ExperinceCard', 'projectsCard', 'ContactCard'];
       cards.forEach(cardId => {
         const card = document.getElementById(cardId);
         if (card) {
@@ -1461,7 +1545,7 @@
       updateElements('.about-icon', 'setAttribute', ['fill', color]);
       updateElements('.skill-circle', 'setAttribute', ['stroke', color]);
       updateElements('.company-name', 'style.color', color);
-      updateElements('.project-content', 'style.backgroundColor', color);
+      updateElements('.projects-content', 'style.backgroundColor', color);
       updateElements('.social-icon', 'style.fill', color);
       updateElements('.checkmark-icon', 'style.fill', color);
       updateElements('#contact .social-link', 'style.borderColor', color);
@@ -1532,8 +1616,8 @@
       }
     });
 
-    function filterProjects(category) {
-      const cards = document.querySelectorAll('.project-card');
+    function filterProjectss(category) {
+      const cards = document.querySelectorAll('.projects-card');
       const buttons = document.querySelectorAll('.filter-btn');
       
       buttons.forEach(btn => {
